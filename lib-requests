@@ -44,3 +44,10 @@ response = rq.head("https://google.com")
 print(response.headers)
 
 ##############################################################
+import requests as rq
+
+putParams = {'param1':'value2', 'param2':'value2'}
+responsePut = rq.put("https://google.com", data=putParams)
+print(responsePut.status_code)
+
+##############################################################
