@@ -1,6 +1,7 @@
 pip install requests
 pip freeze
 
+##############################################################
 import requests as rq
 
 responce = rq("https://google.com")
@@ -9,7 +10,7 @@ print(responce)
 responce = rq("https://google.com/type5")
 print(responce)
 
-
+##############################################################
 import requests as rq
 
 getParams = {'param1':'value1', 'param2':'value2'}
@@ -17,3 +18,15 @@ response = rq.get("https://google.com", getParams)
 
 print(response.url)
 
+##############################################################
+import requests as rq
+
+getParams = {'param1':'value1', 'param2':'value2'}
+responseGet = rq.get("https://google.com", getParams)
+
+print(responseGet.url)
+
+postParams = {'param1':'value1', 'param2':'value2'}
+responsePost = rq.post("https://httpbin.org/post", postParams, timeout = 2)
+
+print(responsePost.json()['form'])
