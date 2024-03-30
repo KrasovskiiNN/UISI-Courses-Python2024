@@ -30,3 +30,6 @@ postParams = {'param1':'value1', 'param2':'value2'}
 responsePost = rq.post("https://httpbin.org/post", postParams, timeout = 2)
 
 print(responsePost.json()['form'])
+
+##############################################################
+
