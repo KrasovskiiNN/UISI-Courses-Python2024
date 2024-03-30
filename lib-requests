@@ -55,3 +55,14 @@ responsePut2 = rq.put("https://httpbin.org/put", data=putParams2)
 print(responsePut2.status_code)
 
 ##############################################################
+import requests as rq
+
+putParams = {'param1':'value2', 'param2':'value2'}
+responsePut = rq.put("https://httpbin.org/put", data=putParams)
+print(responsePut.status_code)
+
+patchParams = {'param1':'value2', 'param2':'value2'}
+responsePatch = rq.patch("https://httpbin.org/patch", data=patchParams)
+print(responsePatch.status_code)
+
+##############################################################
