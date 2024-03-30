@@ -66,3 +66,10 @@ responsePatch = rq.patch("https://httpbin.org/patch", data=patchParams)
 print(responsePatch.status_code)
 
 ##############################################################
+import requests as rq
+
+deleteParams = {'param1':'value2', 'param2':'value2'}
+responseDelete = rq.delete("https://httpbin.org/delete", data=deleteParams)
+print(responseDelete.status_code)
+
+##############################################################
