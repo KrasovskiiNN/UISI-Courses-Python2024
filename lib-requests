@@ -38,3 +38,9 @@ response = rq.options("https://google.com")
 print(response.headers["Allow"])
 
 ##############################################################
+import requests as rq
+
+response = rq.head("https://google.com")
+print(response.headers)
+
+##############################################################
