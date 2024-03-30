@@ -1,0 +1,10 @@
+pip install requests
+pip freeze
+
+import requests as rq
+
+responce = rq("https://google.com")
+print(responce)
+
+responce = rq("https://google.com/type5")
+print(responce)
