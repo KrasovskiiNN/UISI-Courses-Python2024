@@ -34,7 +34,7 @@ print(responsePost.json()['form'])
 ##############################################################
 import requests as rq
 
-responce = rq.options("https://google.com")
-print(responce.headers["Allow"])
+response = rq.options("https://google.com")
+print(response.headers["Allow"])
 
 ##############################################################
