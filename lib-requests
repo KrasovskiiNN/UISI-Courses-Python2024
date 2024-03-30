@@ -32,4 +32,9 @@ responsePost = rq.post("https://httpbin.org/post", postParams, timeout = 2)
 print(responsePost.json()['form'])
 
 ##############################################################
+import requests as rq
 
+responce = rq.options("https://google.com")
+print(responce.headers["Allow"])
+
+##############################################################
