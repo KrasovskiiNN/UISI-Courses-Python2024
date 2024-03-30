@@ -14,7 +14,7 @@ courseValue = b.select('.current-course__value')
 
 for a in courseValue:
     x = (a.getText().strip())
-    result=result+x+"\n\n"
+    result = result + x + "\n\n"
 print('Курс доллара', x)
 
 ##############################
