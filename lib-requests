@@ -8,3 +8,12 @@ print(responce)
 
 responce = rq("https://google.com/type5")
 print(responce)
+
+
+import requests as rq
+
+getParams = {'param1':'value1', 'param2':'value2'}
+response = rq.get("https://google.com", getParams)
+
+print(response.url)
+
