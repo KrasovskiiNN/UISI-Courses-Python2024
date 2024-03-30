@@ -34,3 +34,4 @@ for a in anekdotText:
 print('Анекдот: ', result)
 
 ##############################
+
