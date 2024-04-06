@@ -1,0 +1,60 @@
+# pip install pytelegrambotapi
+
+import requests
+import bs4
+import telebot
+
+botHoroMailRu = telebot.TeleBot('7177290585:AAFGcizDGCz8lEiK0T6koEcGRvoMsoOyCNk')
+
+from telebot import types
+
+def get_goroskop ():
+    x = requests.get('https://horo.mail.ru/')
+    y = bs4.BeautifulSoup(x.text, 'html.parser')
+    z = ''
+
+    horoText = y.select('.article__text')
+
+    for a in horoText:
+        x = (a.getText().strip())
+        z = z + x +'\n\n'
+    return x
+
+
+@botHoroMailRu.message_handler(commands=['hello'])
+def helloBot(message):
+    hello_mess = f'Добрый день {message.from_user.first_name}!. Welcome.:)'
+    botHoroMailRu.send_message(message.chat.id, hello_mess)
+
+@botHoroMailRu.message_handler(commands=['start'])
+def startBot(message):
+    start_mess = f'Гороскоп на каждый день от Mail.Ru'
+    botHoroMailRu.send_message(message.chat.id, start_mess)
+
+@botHoroMailRu.message_handler(content_types=['text'])
+def send_u(message):
+    if ("Гороскоп" in message.text or "гороскоп" in message.text):
+        botHoroMailRu.send_message(message.chat.id, get_goroskop())
+'''
+@botHoroMailRu.message_handler(commands=['start'])
+def startBot(message):
+  first_mess = f"<b>{message.from_user.first_name} {message.from_user.id}</b>, привет!\nХочешь гороскоп на сегодняшний день?"
+  markup = types.InlineKeyboardMarkup()
+  button_yes = types.InlineKeyboardButton(text = 'Да', callback_data='yes')
+  markup.add(button_yes)
+  botHoroMailRu.send_message(message.chat.id, first_mess, parse_mode='html', reply_markup=markup)
+
+@botHoroMailRu.callback_query_handler(func=lambda call:True)
+def response(function_call):
+  if function_call.message:
+     if function_call.data == "yes":
+        second_mess = x
+
+        markup = types.InlineKeyboardMarkup()
+        markup.add(types.InlineKeyboardButton("Гороскопы", url="https://horo.mail.ru/"))
+        botHoroMailRu.send_message(function_call.message.chat.id, second_mess, reply_markup=markup)
+        botHoroMailRu.answer_callback_query(function_call.id)
+
+'''
+
+botHoroMailRu.infinity_polling()
