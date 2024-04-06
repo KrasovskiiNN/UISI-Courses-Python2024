@@ -8,17 +8,30 @@ botHoroMailRu = telebot.TeleBot('7177290585:AAFGcizDGCz8lEiK0T6koEcGRvoMsoOyCNk'
 
 from telebot import types
 
-def get_goroskop ():
-    x = requests.get('https://horo.mail.ru/')
-    y = bs4.BeautifulSoup(x.text, 'html.parser')
-    z = ''
+def get_goroskop_today_all():
+    x1 = requests.get('https://horo.mail.ru/')
+    y1 = bs4.BeautifulSoup(x1.text, 'html.parser')
+    z1 = ''
 
-    horoText = y.select('.article__text')
+    horoText1 = y1.select('.article__text')
 
-    for a in horoText:
-        x = (a.getText().strip())
-        z = z + x +'\n\n'
-    return x
+    for a1 in horoText1:
+        x1 = (a1.getText().strip())
+        z1 = z1 + x1 +'\n\n'
+    return x1
+
+def get_goroskop_today_libra():
+    x2 = requests.get('https://horo.mail.ru/prediction/libra/today/')
+    y2 = bs4.BeautifulSoup(x2.text, 'html.parser')
+    z2 = ''
+
+    horoText2 = y2.select('.article__text')
+
+    for a2 in horoText2:
+        x2 = (a2.getText().strip())
+        z2 = z2 + x2 +'\n\n'
+    return x2
+
 
 
 @botHoroMailRu.message_handler(commands=['hello'])
@@ -34,8 +47,18 @@ def startBot(message):
 @botHoroMailRu.message_handler(content_types=['text'])
 def send_u(message):
     if ("Гороскоп" in message.text or "гороскоп" in message.text):
-        botHoroMailRu.send_message(message.chat.id, get_goroskop())
+        botHoroMailRu.send_message(message.chat.id, get_goroskop_today_all())
+    elif("Весы" in message.text or "весы" in message.text):
+        botHoroMailRu.send_message(message.chat.id, get_goroskop_today_libra())
+    else:
+        botHoroMailRu.send_message(message.chat.id, "ERROR!")
+        
+
 '''
+@botHoroMailRu.message_handler(function=lambda, message: True)
+    zodiac_sign =
+
+
 @botHoroMailRu.message_handler(commands=['start'])
 def startBot(message):
   first_mess = f"<b>{message.from_user.first_name} {message.from_user.id}</b>, привет!\nХочешь гороскоп на сегодняшний день?"
