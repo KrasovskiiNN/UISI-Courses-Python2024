@@ -32,6 +32,17 @@ def get_goroskop_today_libra():
         z2 = z2 + x2 +'\n\n'
     return x2
 
+def get_goroskop_today_scorpio():
+    x3 = requests.get('https://horo.mail.ru/prediction/scorpio/today/')
+    y3 = bs4.BeautifulSoup(x3.text, 'html.parser')
+    z3 = ''
+
+    horoText3 = y3.select('.article__text')
+
+    for a3 in horoText3:
+        x3 = (a3.getText().strip())
+        z3 = z3 + x3 +'\n\n'
+    return x3
 
 
 @botHoroMailRu.message_handler(commands=['hello'])
@@ -44,21 +55,41 @@ def startBot(message):
     start_mess = f'Гороскоп на каждый день от Mail.Ru'
     botHoroMailRu.send_message(message.chat.id, start_mess)
 
+'''
 @botHoroMailRu.message_handler(content_types=['text'])
 def send_u(message):
     if ("Гороскоп" in message.text or "гороскоп" in message.text):
         botHoroMailRu.send_message(message.chat.id, get_goroskop_today_all())
     elif("Весы" in message.text or "весы" in message.text):
         botHoroMailRu.send_message(message.chat.id, get_goroskop_today_libra())
+    elif ("Скорпион" in message.text or "скорпион" in message.text):
+        botHoroMailRu.send_message(message.chat.id, get_goroskop_today_scorpio())
     else:
         botHoroMailRu.send_message(message.chat.id, "ERROR!")
-        
+'''
+
+@botHoroMailRu.message_handler(func=lambda message: True)
+def echo_all(message):
+    zodiac_sign = message.text.lower()
+
+    try:
+        response = requests.get(f'https://horo.mail.ru/prediction/{zodiac_sign}/today/')
+        soup = bs4.BeautifulSoup(response.text, 'html.parser')
+        prediction = soup.find('div', class_ = 'article__text').text
+        botHoroMailRu.reply_to(message, f'Гороскоп на сегодня для {zodiac_sign}:\n {prediction}')
+    except Exception as e:
+        botHoroMailRu.reply_to(message, "Извините я не смог найти гороскоп для этого знака зодиака")
+
+@botHoroMailRu.message_handler(content_types=['text'])
+def send_u(message):
+    if ("Гороскоп" in message.text or "гороскоп" in message.text):
+        botHoroMailRu.send_message(message.chat.id, get_goroskop_today_all())
+    elif(zodiac_sign in message.text):
+        botHoroMailRu.send_message(message.chat.id, echo_all())
+    else:
+        botHoroMailRu.send_message(message.chat.id, "ERROR!")
 
 '''
-@botHoroMailRu.message_handler(function=lambda, message: True)
-    zodiac_sign =
-
-
 @botHoroMailRu.message_handler(commands=['start'])
 def startBot(message):
   first_mess = f"<b>{message.from_user.first_name} {message.from_user.id}</b>, привет!\nХочешь гороскоп на сегодняшний день?"
