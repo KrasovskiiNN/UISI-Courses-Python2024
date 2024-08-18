@@ -2,7 +2,7 @@
 
 import telebot
 
-botTimeWeb = telebot.TeleBot('7177290585:AAFGcizDGCz8lEiK0T6koEcGRvoMsoOyCNk')
+botTimeWeb = telebot.TeleBot
 
 from telebot import types
 
