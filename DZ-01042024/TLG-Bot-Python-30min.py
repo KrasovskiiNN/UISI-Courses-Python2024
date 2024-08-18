@@ -1,7 +1,7 @@
 # pip install pytelegrambotapi
 
 import telebot
-bot = telebot.TeleBot('7177290585:AAFGcizDGCz8lEiK0T6koEcGRvoMsoOyCNk')
+bot = telebot.TeleBot
 
 from telebot import types
 @bot.message_handler(content_types=['text'])
