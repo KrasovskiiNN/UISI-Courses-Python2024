@@ -4,7 +4,7 @@ import requests
 import bs4
 import telebot
 
-botHoroMailRu = telebot.TeleBot('7177290585:AAFGcizDGCz8lEiK0T6koEcGRvoMsoOyCNk')
+botHoroMailRu = telebot.TeleBot
 
 from telebot import types
 
